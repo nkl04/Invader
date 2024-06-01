@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Character
+    uniqueID: 3776172671
+    locked: 0
+  - name: Bullet
+    uniqueID: 494763439
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
