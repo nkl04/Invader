@@ -24,7 +24,7 @@ public class MainCamera : Singleton<MainCamera>
     public Vector2 MaxMoveableBounds {get{return maxMoveableBounds;}}
 
 
-    private void Awake() {
+    private new void Awake() {
         Camera mainCamera = Camera.main;
 
         minBounds = mainCamera.ViewportToWorldPoint(new Vector2(0f,0f));

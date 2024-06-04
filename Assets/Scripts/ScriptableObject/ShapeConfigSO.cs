@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu( fileName = "ShapeConfigSO", menuName = "SO/ShapeConfigSO")]
+[CreateAssetMenu( fileName = "ShapeConfigSO", menuName = "SO/ConfigSO/ShapeConfigSO")]
 public class ShapeConfigSO : ScriptableObject
 {
     [SerializeField] private Transform shapePrefab;

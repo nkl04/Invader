@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5806674648911874936}
   - component: {fileID: 8262054920935251911}
   - component: {fileID: 5516730669210807308}
+  - component: {fileID: 6421934297403339918}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3a9dcc67ae27448b50c68668f433f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flyMode: 0
 --- !u!114 &8262054920935251911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +131,16 @@ MonoBehaviour:
   bulletSpeed: 10
   maximumRate: 0.986
   minimumRate: 0.3
+--- !u!114 &6421934297403339918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6092493401394074063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51917c0c57e4db84c89df8f60b71af67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0, z: 0}

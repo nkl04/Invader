@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
+    public PathConfigSO PathConfigSO { get => pathConfigSO; set => pathConfigSO = value; }
     [SerializeField] private float speed = 5f;
     [SerializeField] private PathConfigSO pathConfigSO;
 

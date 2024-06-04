@@ -19,7 +19,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [SerializeField] private Dictionary<string,List<GameObject>> poolDictionary;
     
 
-    private void Awake() {
+    private new void Awake() {
         poolDictionary = new Dictionary<string, List<GameObject>>();
 
         foreach (Pool pool in poolList)

@@ -7,7 +7,7 @@ public class GameInput : Singleton<GameInput>
 {
     private PlayerInputAction playerInputAction;
 
-    private void Awake() {
+    private new void Awake() {
         playerInputAction = new PlayerInputAction();
         playerInputAction.Player.Enable();
     }

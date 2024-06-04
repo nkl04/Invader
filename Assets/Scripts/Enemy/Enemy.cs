@@ -16,16 +16,19 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FollowPath followPath = GetComponent<FollowPath>();
+        FindTargetPosition findTargetPosition = GetComponent<FindTargetPosition>();
+        
         if (flyMode == FlyMode.FollowALine)
         {
-            FollowPath followPath = GetComponent<FollowPath>();
             followPath.enabled = true;
+            findTargetPosition.enabled = false;
         }
-        // else if (flyMode == FlyMode.ToShapeConfig)
-        // {
-        //     FollowShape followShape = GetComponent<FollowShape>();
-        //     followShape.enabled = true;
-        // }
+        else if (flyMode == FlyMode.ToShapeConfig)
+        {
+            findTargetPosition.enabled = true;
+            followPath.enabled = false;
+        }
     }
 
 }

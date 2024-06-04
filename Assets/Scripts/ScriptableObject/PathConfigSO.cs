@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu( fileName = "PathConfigSO", menuName = "SO/PathConfigSO")]
-public class PathConfigSO : ScriptableObject
+[CreateAssetMenu( fileName = "PathConfigSO", menuName = "SO/ConfigSO/PathConfigSO")]
+public class PathConfigSO : ConfigSO
 {   
     [SerializeField] private Transform pathPrefab;
 

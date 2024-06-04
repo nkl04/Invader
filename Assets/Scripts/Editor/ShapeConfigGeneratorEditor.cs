@@ -10,6 +10,7 @@ public class ShapeConfigGeneratorEditor : Editor
     {
         base.OnInspectorGUI();
 
+        Debug.Log("Editor is running");
         ShapeConfigGenerator shapeConfigGenerator = (ShapeConfigGenerator)target;
 
         if (GUILayout.Button("Generate Shape Config"))
