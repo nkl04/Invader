@@ -872,6 +872,10 @@ MonoBehaviour:
     prefab: {fileID: 1807305280144546074, guid: fca9316102cd23c4698701b64ebdecf1, type: 3}
     size: 32
     expandable: 1
+  - tag: enemy
+    prefab: {fileID: 6092493401394074063, guid: 2319189308fcb3548ac13f5ac935418d, type: 3}
+    size: 20
+    expandable: 1
 --- !u!4 &1055309056
 Transform:
   m_ObjectHideFlags: 0

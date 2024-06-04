@@ -34,6 +34,8 @@ public class EnemyManager : Singleton<EnemyManager>
                     //spawn 2 enemies from 2 spawner points and set their path
                     Enemy enemy1 = SpawnEnemyAndSetPath(enemySpawner.Spawner1, currentStage.pathConfigSOList[0]);
                     Enemy enemy2 = SpawnEnemyAndSetPath(enemySpawner.Spawner2, currentStage.pathConfigSOList[1]);
+                    enemy1.gameObject.SetActive(true);
+                    enemy2.gameObject.SetActive(true);
 
                     if (enemy1 != null )
                     {
@@ -54,6 +56,7 @@ public class EnemyManager : Singleton<EnemyManager>
                 else
                 {
                     //the spawned enemy amount is equal to the enemy amount in the stage
+
                     //TODO: change the stage to the next stage 
                     ResetSpawnAmount();
                     timer = timeBetweenStages;
@@ -77,12 +80,12 @@ public class EnemyManager : Singleton<EnemyManager>
                 {
                     int index = enemySpawner.SpawnAmount;
                     Enemy enemy = enemySpawner.SpawnEnemyFromSpawnerSequential();
+                    enemy.FlyMode = currentFlyMode;
+                    enemySpawner.SpawnAmount += 1;
                     if (enemy != null)
                     {
-                        enemy.FlyMode = currentFlyMode;
                         enemy.GetComponent<FindTargetPosition>().TargetPosition = currentStage.shapeConfigSO.GetPointList()[index].position;
-                        enemySpawner.SpawnAmount += 1;
-
+                        enemy.gameObject.SetActive(true);
                     }
                     else
                     {

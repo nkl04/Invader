@@ -6,12 +6,12 @@ public class FollowPath : MonoBehaviour
 {
     public PathConfigSO PathConfigSO { get => pathConfigSO; set => pathConfigSO = value; }
     [SerializeField] private float speed = 5f;
-    [SerializeField] private PathConfigSO pathConfigSO;
+    private PathConfigSO pathConfigSO;
 
     private List<Transform> pointsWay;
     private Transform targetPoint;
 
-    private void Start()
+    private void OnEnable()
     {
         pointsWay = pathConfigSO.GetPointsWay;
         targetPoint = pointsWay[0];
@@ -35,8 +35,15 @@ public class FollowPath : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+
+                gameObject.SetActive(false);
             }
         }
     }
+
+    private void OnDisable() {
+        pointsWay = null;
+        targetPoint = null;
+    }
+
 }

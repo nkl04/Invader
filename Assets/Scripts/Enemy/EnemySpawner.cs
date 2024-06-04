@@ -36,11 +36,9 @@ public class EnemySpawner : MonoBehaviour
             currentSpawner = currentSpawner == spawner1 ? spawner2 : spawner1;
         }
 
-        Transform enemyTransform = Instantiate(enemyPrefab,currentSpawner.position,Quaternion.identity);
-       // enemyTransform.gameObject.SetActive(false);
-        enemyTransform.position = currentSpawner.position;
-        enemyTransform.rotation = currentSpawner.rotation;
-        Enemy enemy = enemyTransform.GetComponent<Enemy>();
+        GameObject enemyGameObject = ObjectPooler.Instance.GetObjectFromPool("enemy");
+        enemyGameObject.transform.SetPositionAndRotation(currentSpawner.position, currentSpawner.rotation);
+        Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         return enemy;
     }
 
@@ -51,11 +49,9 @@ public class EnemySpawner : MonoBehaviour
             return null;
         }
 
-        Transform enemyTransform = Instantiate(enemyPrefab,spawner.transform.position,Quaternion.identity);
-       // enemyTransform.gameObject.SetActive(false);
-        enemyTransform.position = spawner.transform.position;
-        enemyTransform.rotation = spawner.rotation;
-        Enemy enemy = enemyTransform.GetComponent<Enemy>();
+        GameObject enemyGameObject = ObjectPooler.Instance.GetObjectFromPool("enemy");
+        enemyGameObject.transform.SetPositionAndRotation(spawner.position, spawner.rotation);
+        Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         return enemy;
     }
 

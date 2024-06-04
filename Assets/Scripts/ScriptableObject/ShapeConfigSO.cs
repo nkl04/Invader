@@ -10,7 +10,7 @@ public class ShapeConfigSO : ScriptableObject
     //get all point list
     public List<Transform> GetPointList()
     {
-        List<Transform> pointList = new List<Transform>();
+        List<Transform> pointList = new();
         foreach (Transform child in shapePrefab)
         {
             pointList.Add(child);

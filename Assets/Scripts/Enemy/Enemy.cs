@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private FlyMode flyMode;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         FollowPath followPath = GetComponent<FollowPath>();
         FindTargetPosition findTargetPosition = GetComponent<FindTargetPosition>();
