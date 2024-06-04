@@ -54,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
         Transform enemyTransform = Instantiate(enemyPrefab,spawner.transform.position,Quaternion.identity);
        // enemyTransform.gameObject.SetActive(false);
         enemyTransform.position = spawner.transform.position;
+        enemyTransform.rotation = spawner.rotation;
         Enemy enemy = enemyTransform.GetComponent<Enemy>();
         return enemy;
     }

@@ -8,6 +8,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private StageListSO stageListSO;
+
     [SerializeField] private float timeBetweenStages;
     [SerializeField] private float timeBetweenSpawns;
 
@@ -72,13 +73,14 @@ public class EnemyManager : Singleton<EnemyManager>
             // To shape config mode
             else if (currentFlyMode == FlyMode.ToShapeConfig)
             {
-                for (int i = 0; i < currentStage.shapeConfigSO.GetPointList().Count; i++)
+                if (enemySpawner.SpawnAmount < currentStage.shapeConfigSO.GetPointList().Count)
                 {
+                    int index = enemySpawner.SpawnAmount;
                     Enemy enemy = enemySpawner.SpawnEnemyFromSpawnerSequential();
                     if (enemy != null)
                     {
                         enemy.FlyMode = currentFlyMode;
-                        enemy.GetComponent<FindTargetPosition>().TargetPosition = currentStage.shapeConfigSO.GetPointList()[i].position;
+                        enemy.GetComponent<FindTargetPosition>().TargetPosition = currentStage.shapeConfigSO.GetPointList()[index].position;
                         enemySpawner.SpawnAmount += 1;
 
                     }
@@ -87,7 +89,12 @@ public class EnemyManager : Singleton<EnemyManager>
                         Debug.LogError("Enemy not spawned");
                     }
                 }
+                else
+                {
+                    enemySpawner.CanSpawn = false; 
+                }
             }
+        
         }
         
         #region Time counter
