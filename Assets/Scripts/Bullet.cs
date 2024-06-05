@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
             Hide();
         }
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<Bullet>() && bulletSO.Tag.ToString().CompareTo(other.gameObject.tag) != 0)
         {

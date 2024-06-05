@@ -12,7 +12,6 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private Transform spawner1;
     [SerializeField] private Transform spawner2;
-    [SerializeField] private Transform enemyPrefab;
     [SerializeField] private bool canSpawn;
 
     private Transform currentSpawner;
@@ -37,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         GameObject enemyGameObject = ObjectPooler.Instance.GetObjectFromPool("enemy");
-        enemyGameObject.transform.SetPositionAndRotation(currentSpawner.position, currentSpawner.rotation);
+        enemyGameObject.transform.position = currentSpawner.position;
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         return enemy;
     }
@@ -50,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         GameObject enemyGameObject = ObjectPooler.Instance.GetObjectFromPool("enemy");
-        enemyGameObject.transform.SetPositionAndRotation(spawner.position, spawner.rotation);
+        enemyGameObject.transform.position = spawner.position;
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         return enemy;
     }

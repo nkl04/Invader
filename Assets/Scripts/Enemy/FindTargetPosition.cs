@@ -25,6 +25,6 @@ public class FindTargetPosition : MonoBehaviour
     //move to the target position
     public void MoveToTargetPosition(float speed)
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
 }

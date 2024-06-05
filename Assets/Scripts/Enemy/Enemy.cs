@@ -19,6 +19,16 @@ public class Enemy : MonoBehaviour
         FollowPath followPath = GetComponent<FollowPath>();
         FindTargetPosition findTargetPosition = GetComponent<FindTargetPosition>();
         
+        if (followPath == null)
+        {
+            followPath = gameObject.AddComponent<FollowPath>();
+        }
+        
+        if (findTargetPosition == null)
+        {
+            findTargetPosition = gameObject.AddComponent<FindTargetPosition>();
+        }
+
         if (flyMode == FlyMode.FollowALine)
         {
             followPath.enabled = true;

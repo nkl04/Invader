@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour, IShooter 
@@ -21,13 +22,12 @@ public class PlayerShooter : MonoBehaviour, IShooter
             {
                 
                 //setup the bullet
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
+                bullet.transform.SetPositionAndRotation(transform.position, quaternion.Euler(0,0,0));
                 bullet.SetActive(true);
 
                 //Shoot the bullet
-                Rigidbody2D rb2d = bullet.GetComponent<Rigidbody2D>();
-                rb2d.velocity = transform.up * bulletSpeed;
+                Rigidbody rb2d = bullet.GetComponent<Rigidbody>();
+                rb2d.velocity = Vector2.up * bulletSpeed;
                 
             }
             yield return new WaitForSeconds(rateTime);

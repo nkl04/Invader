@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
+
 
 public class EnemyShooter : MonoBehaviour, IShooter
 {
@@ -25,16 +27,16 @@ public class EnemyShooter : MonoBehaviour, IShooter
             {               
 
                 //setup the bullet
-                bullet.transform.SetPositionAndRotation(transform.position, transform.rotation);
+                bullet.transform.SetPositionAndRotation(transform.position, quaternion.Euler(0,0,0));
                 bullet.SetActive(true);
 
                 //shoot the bullet down
-                Rigidbody2D rb2d = bullet.GetComponent<Rigidbody2D>();
-                rb2d.velocity = transform.up * bulletSpeed;
+                Rigidbody rb2d = bullet.GetComponent<Rigidbody>();
+                rb2d.velocity = Vector2.down * bulletSpeed;
 
             }
             
-            rateTime = Random.Range(minimumRate, maximumRate);
+            rateTime = UnityEngine.Random.Range(minimumRate, maximumRate);
             
             yield return new WaitForSeconds(rateTime);
         }

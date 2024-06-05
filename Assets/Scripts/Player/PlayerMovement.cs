@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 directionVector;
     private Vector3 deltaPosition;
 
+    private Vector3 rootRotation;
+
+    private void Awake() {
+        rootRotation = transform.rotation.eulerAngles;
+    }
 
     private void Update() {
         if (canMove)
@@ -48,5 +54,24 @@ public class PlayerMovement : MonoBehaviour
         newPos.y = Mathf.Clamp(transform.position.y + deltaPosition.y, MainCamera.Instance.MinMoveableBounds.y, MainCamera.Instance.MaxMoveableBounds.y);
         
         transform.position = newPos; 
+
+        if (directionVector.x != 0)
+        {
+            float tiltAmount = directionVector.x > 0 ? -60f : 60f;
+            transform.DORotate(rootRotation + new Vector3(0f,0f,tiltAmount),0.2f);
+        }
+        else
+        {
+            transform.DORotate(rootRotation, 0.5f);
+        }
+
+        if (directionVector.y > 0)
+        {
+            transform.DORotate(rootRotation + new Vector3(40,0f,0f), 0.3f);
+        }
+        else
+        {
+            transform.DORotate(rootRotation, 0.4f);
+        }
     }
 }

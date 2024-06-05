@@ -116,7 +116,7 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         Enemy enemy = enemySpawner.SpawnEnemyFromSpawner(spawner);
         enemy.FlyMode = currentFlyMode;
-        enemy.GetComponent<FollowPath>().PathConfigSO = pathConfigSO;
+        enemy.GetComponent<FollowPath>().SetPathConfig(pathConfigSO);
         enemy.gameObject.SetActive(true);
         return enemy;
     }
