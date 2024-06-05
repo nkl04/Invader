@@ -53,19 +53,11 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         return enemy;
     }
-
     #endregion
     
-
     public void ResetSpawnAmount()
     {
         spawnAmount = 0;
-    }
-
-    //get spawn amount
-    public int GetSpawnAmount()
-    {
-        return spawnAmount;
     }
 
     //set & get can spawn

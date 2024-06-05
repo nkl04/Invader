@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: StageListSO
   m_EditorClassIdentifier: 
   stageList:
-  - flyMode: 0
-    pathConfigSOList:
-    - {fileID: 11400000, guid: fc80d0e425f14404c81af82177ebefc8, type: 2}
-    - {fileID: 11400000, guid: 38a5d5f0b3f9c7c4097bf1ffdfe52634, type: 2}
-    shapeConfigSO: {fileID: 0}
-    enemyAmount: 19
+  - flyMode: 1
+    pathConfigSOList: []
+    shapeConfigSO: {fileID: 11400000, guid: 486f8c48c84b2264f8c469c878da5495, type: 2}
+    enemyAmount: 0
+  - flyMode: 1
+    pathConfigSOList: []
+    shapeConfigSO: {fileID: 11400000, guid: 486f8c48c84b2264f8c469c878da5495, type: 2}
+    enemyAmount: 0

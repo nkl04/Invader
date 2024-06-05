@@ -8,6 +8,7 @@ public class PlayerShooter : MonoBehaviour, IShooter
     [SerializeField] private string pooledBulletTag;
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private float rateTime = 0.2f;
+    [SerializeField] private bool isAutoShoot = true;
 
     private void Start() {
         StartCoroutine(AutoShoot());

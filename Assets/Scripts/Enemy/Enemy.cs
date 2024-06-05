@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public FlyMode FlyMode { get => flyMode; set => flyMode = value; }
     [SerializeField] private FlyMode flyMode;
 
+    private Rigidbody rb;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -41,4 +42,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void Awake() {
+        rb = GetComponent<Rigidbody>();
+    }
 }

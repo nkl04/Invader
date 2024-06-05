@@ -15,6 +15,8 @@ public class EnemyManager : Singleton<EnemyManager>
     private FlyMode currentFlyMode;
     private Stage currentStage;
     private float timer;
+    private bool isEndOfStage = false;
+    private List<Enemy> enemieList = new List<Enemy>();
     private new void Awake() {
         currentStage = stageListSO.GetStage(0);
         currentFlyMode = currentStage.flyMode;
@@ -23,81 +25,39 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void Update() {
         //if the enemy spawner can spawn enemies
-        if (enemySpawner.CanSpawn)
+        if (enemySpawner.CanSpawn && !isEndOfStage)
         {   
-            // Follow a line mode
-            if (currentFlyMode == FlyMode.FollowALine)
+            switch(currentFlyMode)
             {
-                // if there are still enemies to spawn
-                if (enemySpawner.SpawnAmount < currentStage.enemyAmount)
-                {
-                    //spawn 2 enemies from 2 spawner points and set their path
-                    Enemy enemy1 = SpawnEnemyAndSetPath(enemySpawner.Spawner1, currentStage.pathConfigSOList[0]);
-                    Enemy enemy2 = SpawnEnemyAndSetPath(enemySpawner.Spawner2, currentStage.pathConfigSOList[1]);
-
-                    if (enemy1 != null )
-                    {
-                        enemySpawner.SpawnAmount += 1;
-                    }
-                    if (enemy2 != null )
-                    {
-                        enemySpawner.SpawnAmount += 1;
-                    }
-                    if (enemy1 == null || enemy2 == null)
-                    {
-                        Debug.LogError("Enemy not spawned");
-                    }
-                    
-                    timer = timeBetweenSpawns;
-                    enemySpawner.CanSpawn = false;
-                }
-                else
-                {
-                    //the spawned enemy amount is equal to the enemy amount in the stage
-
-                    //TODO: change the stage to the next stage 
-                    ResetSpawnAmount();
-                    timer = timeBetweenStages;
-                    //change the stage to the next stage
-                    if (stageListSO.GetStage(stageListSO.GetStageIndex(currentStage) + 1) != null)
-                    {
-                        currentStage = stageListSO.GetStage(stageListSO.GetStageIndex(currentStage) + 1);
-                        currentFlyMode = currentStage.flyMode;
-                    }
-                    else
-                    {
-                        Debug.Log("No more stages");
-                    }
-                    enemySpawner.CanSpawn = false;
-                }
+                case FlyMode.FollowALine:
+                        OnFollowPathStage();
+                        break;
+                case FlyMode.ToShapeConfig:
+                        OnToShapeConfigStage();
+                        break;
             }
-            // To shape config mode
-            else if (currentFlyMode == FlyMode.ToShapeConfig)
-            {
-                if (enemySpawner.SpawnAmount < currentStage.shapeConfigSO.GetPointList().Count)
-                {
-                    int index = enemySpawner.SpawnAmount;
-                    Enemy enemy = enemySpawner.SpawnEnemyFromSpawnerSequential();
-                    enemy.FlyMode = currentFlyMode;
-                    enemySpawner.SpawnAmount += 1;
-                    if (enemy != null)
-                    {
-                        enemy.GetComponent<FindTargetPosition>().TargetPosition = currentStage.shapeConfigSO.GetPointList()[index].position;
-                        enemy.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        Debug.LogError("Enemy not spawned");
-                    }
-                }
-                else
-                {
-                    enemySpawner.CanSpawn = false; 
-                }
-            }
-        
         }
-        
+
+        #region End Stage 
+        if(isEndOfStage)
+        {
+            //TODO: change the stage to the next stage 
+            ResetSpawnAmount();
+            timer = timeBetweenStages;
+            //change the stage to the next stage
+            if (stageListSO.GetStage(stageListSO.GetStageIndex(currentStage) + 1) != null)
+            {
+                currentStage = stageListSO.GetStage(stageListSO.GetStageIndex(currentStage) + 1);
+                currentFlyMode = currentStage.flyMode;
+                isEndOfStage = false;
+            }
+            else
+            {
+                Debug.Log("No more stages");
+            }
+        }
+        #endregion
+
         #region Time counter
         if (timer <= 0)
         {
@@ -108,9 +68,82 @@ public class EnemyManager : Singleton<EnemyManager>
             timer -= Time.deltaTime;
         }
         #endregion
-
     }
 
+    private void OnFollowPathStage()
+    {
+        if (enemySpawner.SpawnAmount < currentStage.enemyAmount)
+        {
+            //spawn 2 enemies from 2 spawner points and set their path
+            Enemy enemy1 = SpawnEnemyAndSetPath(enemySpawner.Spawner1, currentStage.pathConfigSOList[0]);
+            Enemy enemy2 = SpawnEnemyAndSetPath(enemySpawner.Spawner2, currentStage.pathConfigSOList[1]);
+
+            if (enemy1 != null )
+            {
+                enemySpawner.SpawnAmount += 1;
+            }
+            if (enemy2 != null )
+            {
+                enemySpawner.SpawnAmount += 1;
+            }
+            if (enemy1 == null || enemy2 == null)
+            {
+                Debug.LogError("Enemy not spawned");
+            }
+            
+            timer = timeBetweenSpawns;
+            enemySpawner.CanSpawn = false;
+        }
+        else
+        {
+            //the spawned enemy amount is equal to the enemy amount in the stage
+            isEndOfStage = true;
+            enemySpawner.CanSpawn = false;
+        }
+    }
+
+    private void OnToShapeConfigStage()
+    {
+        if (enemySpawner.SpawnAmount < currentStage.shapeConfigSO.GetPointList().Count)
+        {
+            int index = enemySpawner.SpawnAmount;
+            Enemy enemy = enemySpawner.SpawnEnemyFromSpawnerSequential();
+            enemy.FlyMode = currentFlyMode;
+            enemySpawner.SpawnAmount += 1;
+            if (enemy != null)
+            {
+                enemy.GetComponent<FindTargetPosition>().TargetPosition = currentStage.shapeConfigSO.GetPointList()[index].position;
+                enemy.gameObject.SetActive(true);
+                enemieList.Add(enemy);
+            }
+            else
+            {
+                Debug.LogError("Enemy not spawned");
+            }
+        }
+        else
+        {
+            enemySpawner.CanSpawn = false; 
+            if (CheckEnemyList())
+            {
+                isEndOfStage = true;
+            }
+        }
+    }
+
+    //check the enemy list and remove the dead enemies
+    public bool CheckEnemyList()
+    {
+        for (int i = 0; i < enemieList.Count; i++)
+        {
+            if (enemieList[i] == null || !enemieList[i].gameObject.activeSelf)
+            {
+                enemieList.RemoveAt(i);
+            }
+        }
+        return enemieList.Count == 0;
+    }
+    
     //spawn an enemy from a spawner point and set its path   
     private Enemy SpawnEnemyAndSetPath(Transform spawner, PathConfigSO pathConfigSO)
     {
@@ -125,4 +158,7 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         enemySpawner.SpawnAmount = 0;
     }
+
+
+
 }
