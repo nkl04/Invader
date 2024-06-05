@@ -13,13 +13,22 @@ public class FollowPath : MonoBehaviour
 
     private void OnEnable()
     {
-        pointsWay = pathConfigSO.GetPointsWay;
-        targetPoint = pointsWay[0];
+        if (pathConfigSO != null)
+        {
+            pointsWay = pathConfigSO.GetPointsWay;
+            if (pointsWay.Count > 0)
+            {
+                targetPoint = pointsWay[0];
+            }
+        }
     }
 
     private void Update()
     {
-        MoveFollowPath();
+        if (pointsWay != null && targetPoint != null)
+        {
+            MoveFollowPath();
+        }
     }
     
     private void MoveFollowPath()
@@ -35,7 +44,6 @@ public class FollowPath : MonoBehaviour
             }
             else
             {
-
                 gameObject.SetActive(false);
             }
         }
@@ -43,7 +51,6 @@ public class FollowPath : MonoBehaviour
 
     private void OnDisable() {
         pointsWay = null;
-        targetPoint = null;
     }
 
 }

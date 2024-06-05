@@ -34,8 +34,6 @@ public class EnemyManager : Singleton<EnemyManager>
                     //spawn 2 enemies from 2 spawner points and set their path
                     Enemy enemy1 = SpawnEnemyAndSetPath(enemySpawner.Spawner1, currentStage.pathConfigSOList[0]);
                     Enemy enemy2 = SpawnEnemyAndSetPath(enemySpawner.Spawner2, currentStage.pathConfigSOList[1]);
-                    enemy1.gameObject.SetActive(true);
-                    enemy2.gameObject.SetActive(true);
 
                     if (enemy1 != null )
                     {
@@ -119,6 +117,7 @@ public class EnemyManager : Singleton<EnemyManager>
         Enemy enemy = enemySpawner.SpawnEnemyFromSpawner(spawner);
         enemy.FlyMode = currentFlyMode;
         enemy.GetComponent<FollowPath>().PathConfigSO = pathConfigSO;
+        enemy.gameObject.SetActive(true);
         return enemy;
     }
     

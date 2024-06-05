@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e942802a1dbae1419d08989d00b8793, type: 3}
   m_Name: Enemy_Bullet
   m_EditorClassIdentifier: 
-  tag: 0
+  tag: 1
   damage: 10
   existTime: 3
