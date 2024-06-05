@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e942802a1dbae1419d08989d00b8793, type: 3}
   m_Name: Player_Bullet
   m_EditorClassIdentifier: 
-  damage: 10
+  tag: 0
+  damage: 50
   existTime: 3

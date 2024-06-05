@@ -18,16 +18,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fc80d0e425f14404c81af82177ebefc8, type: 2}
     - {fileID: 11400000, guid: 38a5d5f0b3f9c7c4097bf1ffdfe52634, type: 2}
     shapeConfigSO: {fileID: 0}
-    enemyAmount: 20
-  - flyMode: 0
-    pathConfigSOList:
-    - {fileID: 11400000, guid: fc80d0e425f14404c81af82177ebefc8, type: 2}
-    - {fileID: 11400000, guid: 38a5d5f0b3f9c7c4097bf1ffdfe52634, type: 2}
-    shapeConfigSO: {fileID: 0}
-    enemyAmount: 10
-  - flyMode: 1
-    pathConfigSOList:
-    - {fileID: 11400000, guid: fc80d0e425f14404c81af82177ebefc8, type: 2}
-    - {fileID: 11400000, guid: 38a5d5f0b3f9c7c4097bf1ffdfe52634, type: 2}
-    shapeConfigSO: {fileID: 11400000, guid: 9a8a4f8f3231de342bae15162c102fc6, type: 2}
-    enemyAmount: 10
+    enemyAmount: 19

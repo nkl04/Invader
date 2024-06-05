@@ -889,7 +889,7 @@ MonoBehaviour:
     expandable: 1
   - tag: enemy
     prefab: {fileID: 6092493401394074063, guid: 2319189308fcb3548ac13f5ac935418d, type: 3}
-    size: 20
+    size: 24
     expandable: 1
 --- !u!4 &1055309056
 Transform:
