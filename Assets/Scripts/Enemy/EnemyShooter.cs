@@ -7,8 +7,8 @@ public class EnemyShooter : MonoBehaviour, IShooter
     [Header("General")]
     [SerializeField] private string pooledBulletTag;
     [SerializeField] private float bulletSpeed = 10f;
-    [SerializeField] [Range(0.7f,1f)] float maximumRate;
-    [SerializeField] [Range(0.2f,0.3f)] float minimumRate;
+    [SerializeField] [Range(3,5f)] float maximumRate;
+    [SerializeField] [Range(1f,1.5f)] float minimumRate;
     
     private float rateTime;
 
@@ -25,8 +25,7 @@ public class EnemyShooter : MonoBehaviour, IShooter
             {               
 
                 //setup the bullet
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
+                bullet.transform.SetPositionAndRotation(transform.position, transform.rotation);
                 bullet.SetActive(true);
 
                 //shoot the bullet down

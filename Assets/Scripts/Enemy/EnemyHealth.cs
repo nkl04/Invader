@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private float currentHeath;
     private bool isDead;
 
-    private void Start() {
+    private void OnEnable() {
         isDead = false;
         currentHeath = maxHeath;
     }
@@ -17,7 +17,6 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void TakeDamage(float damage)
     {
         currentHeath -= damage;
-        
         if (currentHeath <= 0)
         {
             if (!isDead)

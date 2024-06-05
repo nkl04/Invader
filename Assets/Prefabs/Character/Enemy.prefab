@@ -192,7 +192,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  pathConfigSO: {fileID: 11400000, guid: fc80d0e425f14404c81af82177ebefc8, type: 2}
 --- !u!114 &5516730669210807308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,8 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledBulletTag: enemy-bullet
   bulletSpeed: 10
-  maximumRate: 1
-  minimumRate: 0.3
+  maximumRate: 5
+  minimumRate: 1.5
 --- !u!114 &6421934297403339918
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour
             if (other.gameObject.TryGetComponent<IHealth>(out var otherHeath))
             {
                 otherHeath.TakeDamage(bulletSO.Damage);
+                Debug.Log("Hit" + other.gameObject.name);
             }
             Hide();
         }
