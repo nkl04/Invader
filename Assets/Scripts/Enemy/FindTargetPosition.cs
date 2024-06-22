@@ -10,7 +10,9 @@ public class FindTargetPosition : MonoBehaviour
     [SerializeField] private float speed;
     private bool isReachTargetPosition = false;
 
-    private void Update() {
+
+    private void Update()
+    {
         if (isReachTargetPosition)
         {
             return;
@@ -26,5 +28,11 @@ public class FindTargetPosition : MonoBehaviour
     public void MoveToTargetPosition(float speed)
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+    }
+
+    private void OnDisable()
+    {
+        targetPosition = new Vector3();
+        isReachTargetPosition = false;
     }
 }
