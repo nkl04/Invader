@@ -9,7 +9,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     private float currentHeath;
     private bool isDead;
     // private CameraShake cameraShake;
-    private void Start() {
+    private void Awake()
+    {
         isDead = false;
         // cameraShake = GetComponent<CameraShake>();
         currentHeath = maxHeath;

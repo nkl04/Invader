@@ -5,6 +5,7 @@ using UnityEngine;
 public class FindTargetPosition : MonoBehaviour
 {
     public Vector3 TargetPosition { get => targetPosition; set => targetPosition = value; }
+    public bool IsReachTargetPosition { get => isReachTargetPosition; set => isReachTargetPosition = value; }
     public float Speed { get => speed; set => speed = value; }
     private Vector3 targetPosition;
     [SerializeField] private float speed;
