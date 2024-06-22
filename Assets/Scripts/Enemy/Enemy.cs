@@ -19,16 +19,24 @@ public class Enemy : MonoBehaviour
     {
         FollowPath followPath = GetComponent<FollowPath>();
         FindTargetPosition findTargetPosition = GetComponent<FindTargetPosition>();
-        
+        MoveAround moveAround = GetComponent<MoveAround>();
+
         if (followPath == null)
         {
             followPath = gameObject.AddComponent<FollowPath>();
         }
-        
         if (findTargetPosition == null)
         {
             findTargetPosition = gameObject.AddComponent<FindTargetPosition>();
         }
+        if (moveAround == null)
+        {
+            moveAround = gameObject.AddComponent<MoveAround>();
+        }
+
+        findTargetPosition.enabled = false;
+        moveAround.enabled = false;
+        followPath.enabled = false;
 
         if (flyMode == FlyMode.FollowALine)
         {
@@ -42,7 +50,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         rb = GetComponent<Rigidbody>();
     }
 }

@@ -47,6 +47,12 @@ public class EnemyManager : Singleton<EnemyManager>
             //if the enemy spawner can't spawn enemies and the stage is end
             if (isEndOfStage)
             {
+
+                if (IsAllInOnTargetPosition())
+                {
+                    SetMoveAroundAction(true);
+                }
+
                 if (IsClearEnemyList())
                 {
                     timeCounter = timeBetweenStages;
@@ -145,7 +151,6 @@ public class EnemyManager : Singleton<EnemyManager>
         }
         else
         {
-
             isEndOfStage = true;
         }
     }
@@ -163,6 +168,25 @@ public class EnemyManager : Singleton<EnemyManager>
         return enemieList.Count == 0;
     }
 
+    public bool IsAllInOnTargetPosition()
+    {
+        for (int i = 0; i < enemieList.Count; i++)
+        {
+            if (!enemieList[i].GetComponent<FindTargetPosition>().IsReachTargetPosition)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void SetMoveAroundAction(bool isMoveAround)
+    {
+        for (int i = 0; i < enemieList.Count; i++)
+        {
+            enemieList[i].GetComponent<MoveAround>().enabled = isMoveAround;
+        }
+    }
     //spawn an enemy from a spawner point and set its path   
     private Enemy SpawnEnemyAndSetPath(Transform spawner, PathConfigSO pathConfigSO)
     {
@@ -177,7 +201,6 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         enemySpawner.SpawnAmount = 0;
     }
-
 
 
 }
