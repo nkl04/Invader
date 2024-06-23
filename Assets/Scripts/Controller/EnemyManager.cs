@@ -7,7 +7,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
 
     [SerializeField] private EnemySpawner enemySpawner;
-    [SerializeField] private StageListSO stageListSO;
+    [SerializeField] private LevelSO levelSO;
+    [SerializeField] private SelectLevelUI selectLevelUI;
 
     [SerializeField] private float timeBetweenStages;
     [SerializeField] private float timeBetweenSpawns;
@@ -23,9 +24,15 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private bool allowSpawn;
 
-    private void Start()
+    private void Awake()
     {
-        currentStage = stageListSO.GetStage(0);
+        selectLevelUI.OnLevelSelected += SelectLevelUI_OnLevelSelected;
+    }
+
+    private void SelectLevelUI_OnLevelSelected(object sender, SelectLevelUI.OnSelectLevelEventArgs e)
+    {
+        SetLevelSO(e.levelSO);
+        currentStage = levelSO.GetStage(0);
         currentFlyMode = currentStage.flyMode;
         ResetSpawnAmount();
         enemieList = new List<Enemy>();
@@ -88,10 +95,10 @@ public class EnemyManager : Singleton<EnemyManager>
                 {
                     isEndOfStage = false;
                     //change to the next stage
-                    int index = stageListSO.GetStageIndex(currentStage);
-                    if (index < stageListSO.stageList.Count - 1)
+                    int index = levelSO.GetStageIndex(currentStage);
+                    if (index < levelSO.stageList.Count - 1)
                     {
-                        currentStage = stageListSO.GetStage(index + 1);
+                        currentStage = levelSO.GetStage(index + 1);
                         currentFlyMode = currentStage.flyMode;
                         ResetSpawnAmount();
                     }
@@ -217,6 +224,11 @@ public class EnemyManager : Singleton<EnemyManager>
     public void ResetSpawnAmount()
     {
         enemySpawner.SpawnAmount = 0;
+    }
+
+    public void SetLevelSO(LevelSO levelSO)
+    {
+        this.levelSO = levelSO;
     }
 
 

@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using System;
 
-[CustomEditor(typeof(StageListSO))]
+[CustomEditor(typeof(LevelSO))]
 public class StageListEditor : Editor
 {
     private SerializedProperty stageListProperty;

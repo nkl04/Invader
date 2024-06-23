@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StageListSO", menuName = "SO/StageListSO")]
-public class StageListSO : ScriptableObject
+[CreateAssetMenu(fileName = "StageListSO", menuName = "SO/LevelSO")]
+public class LevelSO : ScriptableObject
 {
     public List<Stage> stageList;
 

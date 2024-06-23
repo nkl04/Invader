@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuUI : UIPage
 {
-    [SerializeField] private PlayingUI playingUI;
     [SerializeField] private SettingUI settingUI;
+    [SerializeField] private SelectLevelUI selectLevelUI;
 
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingButton;
@@ -16,7 +14,7 @@ public class MainMenuUI : UIPage
     {
         playButton.onClick.AddListener(() =>
         {
-            UIController.Instance.ClearStackAndSetInitialPage(playingUI);
+            UIController.Instance.PushAndShow(selectLevelUI);
         });
         settingButton.onClick.AddListener(() =>
         {

@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cbed099694ff3e49b209283ca652eac, type: 3}
-  m_Name: StageListSO
+  m_Name: Level1
   m_EditorClassIdentifier: 
   stageList:
+  - flyMode: 0
+    pathConfigSOList:
+    - {fileID: 11400000, guid: fc80d0e425f14404c81af82177ebefc8, type: 2}
+    - {fileID: 11400000, guid: 38a5d5f0b3f9c7c4097bf1ffdfe52634, type: 2}
+    shapeConfigSO: {fileID: 11400000, guid: 486f8c48c84b2264f8c469c878da5495, type: 2}
+    enemyAmount: 10
   - flyMode: 1
     pathConfigSOList: []
     shapeConfigSO: {fileID: 11400000, guid: 486f8c48c84b2264f8c469c878da5495, type: 2}

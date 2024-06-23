@@ -8,7 +8,8 @@ public enum GameState
     MainMenu,
     InGame,
     Pause,
-    Setting
+    Setting,
+    SelectLevel
 }
 public class GameController : Singleton<GameController>
 {
@@ -20,6 +21,7 @@ public class GameController : Singleton<GameController>
     [SerializeField] private SettingUI settingUI;
     [SerializeField] private PlayingUI playingUI;
     [SerializeField] private PauseUI pauseUI;
+    [SerializeField] private SelectLevelUI selectLevelUI;
 
 
     private GameState gameState;
@@ -67,6 +69,8 @@ public class GameController : Singleton<GameController>
                 Handle_PauseState();
                 break;
             case GameState.Setting:
+                break;
+            case GameState.SelectLevel:
                 break;
         }
 
