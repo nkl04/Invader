@@ -21,76 +21,93 @@ public class EnemyManager : Singleton<EnemyManager>
     private Stage currentStage;
     private List<Enemy> enemieList;
 
-    private new void Awake()
+    private bool allowSpawn;
+
+    private void Start()
     {
         currentStage = stageListSO.GetStage(0);
         currentFlyMode = currentStage.flyMode;
         ResetSpawnAmount();
         enemieList = new List<Enemy>();
+        GameController.Instance.OnGameStateUpdated += GameController_OnGameStateUpdated;
+    }
+    private void GameController_OnGameStateUpdated(object sender, System.EventArgs e)
+    {
+        if (GameController.Instance.GameState == GameState.InGame)
+        {
+            allowSpawn = true;
+        }
+        else
+        {
+            allowSpawn = false;
+        }
     }
 
     private void Update()
     {
-        //if the enemy spawner can spawn enemies
-        if (enemySpawner.CanSpawn)
+        if (allowSpawn)
         {
-            switch (currentFlyMode)
+            //if the enemy spawner can spawn enemies
+            if (enemySpawner.CanSpawn)
             {
-                case FlyMode.FollowALine:
-                    OnFollowPathStage();
-                    break;
-                case FlyMode.ToShapeConfig:
-                    OnToShapeConfigStage();
-                    break;
+                switch (currentFlyMode)
+                {
+                    case FlyMode.FollowALine:
+                        OnFollowPathStage();
+                        break;
+                    case FlyMode.ToShapeConfig:
+                        OnToShapeConfigStage();
+                        break;
+                }
+                #region When the stage is in the end
+                //if the enemy spawner can't spawn enemies and the stage is end
+                if (isEndOfStage)
+                {
+
+                    if (IsAllInOnTargetPosition())
+                    {
+                        SetMoveAroundAction(true);
+                    }
+
+                    if (IsClearEnemyList())
+                    {
+                        timeCounter = timeBetweenStages;
+                        enemySpawner.CanSpawn = false;
+                    }
+                }
+                #endregion
             }
-            #region When the stage is in the end
-            //if the enemy spawner can't spawn enemies and the stage is end
-            if (isEndOfStage)
+
+            #region Time counter
+            if (timeCounter <= 0)
             {
+                enemySpawner.CanSpawn = true;
 
-                if (IsAllInOnTargetPosition())
+                #region When the stage is in the end
+                if (IsClearEnemyList() && isEndOfStage)
                 {
-                    SetMoveAroundAction(true);
+                    isEndOfStage = false;
+                    //change to the next stage
+                    int index = stageListSO.GetStageIndex(currentStage);
+                    if (index < stageListSO.stageList.Count - 1)
+                    {
+                        currentStage = stageListSO.GetStage(index + 1);
+                        currentFlyMode = currentStage.flyMode;
+                        ResetSpawnAmount();
+                    }
+                    else
+                    {
+                        Debug.Log("All stages are completed");
+                    }
                 }
-
-                if (IsClearEnemyList())
-                {
-                    timeCounter = timeBetweenStages;
-                    enemySpawner.CanSpawn = false;
-                }
+                #endregion
+            }
+            else
+            {
+                timeCounter -= Time.deltaTime;
             }
             #endregion
         }
-
-        #region Time counter
-        if (timeCounter <= 0)
-        {
-            enemySpawner.CanSpawn = true;
-
-            #region When the stage is in the end
-            if (IsClearEnemyList() && isEndOfStage)
-            {
-                isEndOfStage = false;
-                //change to the next stage
-                int index = stageListSO.GetStageIndex(currentStage);
-                if (index < stageListSO.stageList.Count - 1)
-                {
-                    currentStage = stageListSO.GetStage(index + 1);
-                    currentFlyMode = currentStage.flyMode;
-                    ResetSpawnAmount();
-                }
-                else
-                {
-                    Debug.Log("All stages are completed");
-                }
-            }
-            #endregion
-        }
-        else
-        {
-            timeCounter -= Time.deltaTime;
-        }
-        #endregion
     }
 
     private void OnFollowPathStage()

@@ -6,16 +6,28 @@ public class PlayerHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private float maxHeath;
     [SerializeField] private bool isInvulnerable;
+
+    //Camera 
+    private Camera cam;
+    private CameraShake cameraShake;
+
+    //Health
     private float currentHeath;
     private bool isDead;
-    // private CameraShake cameraShake;
     private void Awake()
     {
+        cam = Camera.main;
         isDead = false;
-        // cameraShake = GetComponent<CameraShake>();
+        cameraShake = cam.GetComponent<CameraShake>();
         currentHeath = maxHeath;
+
+        GameController.Instance.OnGameStateUpdated += Instance_OnGameStateUpdated;
     }
 
+    private void Instance_OnGameStateUpdated(object sender, System.EventArgs e)
+    {
+        isInvulnerable = true;
+    }
 
     public void TakeDamage(float damage)
     {
@@ -27,11 +39,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
         // take damage
         currentHeath -= damage;
         Debug.Log("Player Health: " + currentHeath);
-        // if (useHitCameraEffect && cameraShake != null)
-        // {
-        //     cameraShake.Play(); // shake the camera
-        //     AudioManager.Instance.PlayShakeClip(); // play shake camera clip
-        // }
+        if (cameraShake != null)
+        {
+            cameraShake.Play(); // shake the camera
+            //AudioManager.Instance.PlayShakeClip(); // play shake camera clip
+        }
         if (currentHeath <= 0)
         {
             if (!isDead)
