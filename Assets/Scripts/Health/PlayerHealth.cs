@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private float maxHeath;
-    [SerializeField] private bool isInvulnerable;
+    [SerializeField] private bool isInvulnerable = false;
 
     //Camera 
     private Camera cam;
@@ -21,12 +23,20 @@ public class PlayerHealth : MonoBehaviour, IHealth
         cameraShake = cam.GetComponent<CameraShake>();
         currentHeath = maxHeath;
 
-        GameController.Instance.OnGameStateUpdated += Instance_OnGameStateUpdated;
+        GameController.Instance.OnGameStateUpdated += GameController_OnGameStateUpdated;
     }
 
-    private void Instance_OnGameStateUpdated(object sender, System.EventArgs e)
+    private void Start()
     {
-        isInvulnerable = true;
+        healthBar.SetMaxHeath(maxHeath);
+    }
+
+    private void GameController_OnGameStateUpdated(object sender, System.EventArgs e)
+    {
+        if (GameController.Instance.GameState == GameState.InGame)
+        {
+
+        }
     }
 
     public void TakeDamage(float damage)
@@ -38,7 +48,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         }
         // take damage
         currentHeath -= damage;
-        Debug.Log("Player Health: " + currentHeath);
+        healthBar.SetHeath(currentHeath);
         if (cameraShake != null)
         {
             cameraShake.Play(); // shake the camera

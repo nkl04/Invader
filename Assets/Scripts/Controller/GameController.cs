@@ -26,14 +26,12 @@ public class GameController : Singleton<GameController>
 
     private new void Awake()
     {
-        gameState = GameState.MainMenu;
+        UIController.Instance.ClearStackAndSetInitialPage(mainMenuUI);
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
 
     private void Start()
     {
-        UpdateGameState(gameState);
-        UIController.Instance.ClearStackAndSetInitialPage(mainMenuUI);
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
@@ -67,6 +65,8 @@ public class GameController : Singleton<GameController>
                 break;
             case GameState.Pause:
                 Handle_PauseState();
+                break;
+            case GameState.Setting:
                 break;
         }
 

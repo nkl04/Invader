@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseUI : UIPage
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private SettingUI settingUI;
+    [SerializeField] private MainMenuUI MainMenuUI;
+
+    //resume button
+    [SerializeField] private Button resumeButton;
+
+    //setting button
+    [SerializeField] private Button settingButton;
+
+    //quit button
+    [SerializeField] private Button mainMenuButton;
+
+    private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        resumeButton.onClick.AddListener(() =>
+        {
+            UIController.Instance.PopAndReturn();
+        });
+        settingButton.onClick.AddListener(() =>
+        {
+            UIController.Instance.PushAndShow(settingUI);
+        });
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            UIController.Instance.ClearStackAndSetInitialPage(MainMenuUI);
+        });
     }
 }

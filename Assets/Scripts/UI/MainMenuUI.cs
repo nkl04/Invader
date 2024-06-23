@@ -26,5 +26,6 @@ public class MainMenuUI : UIPage
         {
             Application.Quit();
         });
+        Show();
     }
 }

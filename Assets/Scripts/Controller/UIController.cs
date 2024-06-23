@@ -19,7 +19,6 @@ public class UIController : Singleton<UIController>
         page.Show();
         uipageStack.Push(page);
         GameController.Instance.UpdateGameState(page.gameState);
-
     }
 
     //go back to the previous page
