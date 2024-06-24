@@ -7,6 +7,7 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     public bool CanMove { get => canMove; set => canMove = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private bool canMove;
@@ -70,20 +71,20 @@ public class PlayerMovement : MonoBehaviour
         if (directionVector.x != 0)
         {
             float tiltAmount = directionVector.x > 0 ? -60f : 60f;
-            transform.DORotate(rootRotation + new Vector3(0f, 0f, tiltAmount), 0.2f);
+            transform.DORotate(rootRotation + new Vector3(0f, tiltAmount, 0f), 0.2f);
         }
         else
         {
             transform.DORotate(rootRotation, 0.5f);
         }
 
-        if (directionVector.y > 0)
-        {
-            transform.DORotate(rootRotation + new Vector3(40, 0f, 0f), 0.3f);
-        }
-        else
-        {
-            transform.DORotate(rootRotation, 0.4f);
-        }
+        //if (directionVector.y > 0)
+        //{
+        //    transform.DORotate(rootRotation + new Vector3(40, 0f, 0f), 0.3f);
+        //}
+        //else
+        //{
+        //    transform.DORotate(rootRotation, 0.4f);
+        //}
     }
 }

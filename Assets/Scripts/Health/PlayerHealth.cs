@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
+    public float MaxHealth { get => maxHeath; set => maxHeath = value; }
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private float maxHeath;
     [SerializeField] private bool isInvulnerable = false;

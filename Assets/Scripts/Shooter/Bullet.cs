@@ -7,14 +7,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private BulletSO bulletSO;
 
     //set active true all children if have
-    private void OnEnable() {
+    private void OnEnable()
+    {
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
         }
     }
 
-    private void Update() {
+    private void Update()
+    {
         StartCoroutine(ToggleObject());
     }
 
@@ -30,6 +32,10 @@ public class Bullet : MonoBehaviour
     {
         if (!other.GetComponent<Bullet>() && bulletSO.Tag.ToString().CompareTo(other.gameObject.tag) != 0)
         {
+            if (other.tag == "Player")
+            {
+                Debug.Log("hit");
+            }
             if (other.gameObject.TryGetComponent<IHealth>(out var otherHeath))
             {
                 otherHeath.TakeDamage(bulletSO.Damage);
