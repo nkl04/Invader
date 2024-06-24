@@ -70,4 +70,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
             currentHeath = maxHeath;
         }
     }
+
+    public void ResetHealth()
+    {
+        healthBar.SetMaxHeath(maxHeath);
+        currentHeath = maxHeath;
+    }
 }

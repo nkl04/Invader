@@ -9,9 +9,10 @@ public class DropItemSpawner : Singleton<DropItemSpawner>
     public void Drop(List<DropRate> itemList, Vector3 position)
     {
         IItem itemSO = itemList[0].item;
-        Item original = itemPrefab.GetComponent<Item>();
-        original.gameObject.SetActive(false);
-        Item dropItem = Instantiate(original, position, Quaternion.identity);
+
+        Item dropItem = ObjectPooler.Instance.GetObjectFromPool(itemSO.itemName).GetComponent<Item>();
+        dropItem.transform.position = position;
+
         dropItem.IItem = itemSO;
         dropItem.gameObject.SetActive(true);
     }

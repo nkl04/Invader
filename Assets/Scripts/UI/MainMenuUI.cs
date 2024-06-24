@@ -10,6 +10,7 @@ public class MainMenuUI : UIPage
     [SerializeField] private Button settingButton;
     [SerializeField] private Button quitButton;
 
+
     private void Start()
     {
         playButton.onClick.AddListener(() =>

@@ -13,7 +13,7 @@ public class SelectLevelUI : UIPage
     }
 
     public event EventHandler<OnSelectLevelEventArgs> OnLevelSelected;
-    [SerializeField] private PlayingUI playingUI;
+    [SerializeField] private SelectModelUI selectModelUI;
     [SerializeField] private LevelContainerSO levelContainerSO;
     [SerializeField] private Button levelButtonPrefab;
     [SerializeField] private Transform levelsParent;
@@ -32,7 +32,7 @@ public class SelectLevelUI : UIPage
                 {
                     levelSO = levelSO
                 });
-                UIController.Instance.PushAndShow(playingUI);
+                UIController.Instance.PushAndShow(selectModelUI);
             });
         }
     }

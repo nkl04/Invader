@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3cd18c61a0f3a5448bb6c12bd95a35a, type: 3}
   m_Name: CoinSO
   m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: coin
   itemPrefab: {fileID: 5799032681269358197, guid: c4e6fd83c30173845b9f7fc2ea14f2dd, type: 3}
-  existTime: 5
+  existTime: 10
   data: 1

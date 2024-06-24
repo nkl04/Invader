@@ -9,7 +9,8 @@ public enum GameState
     InGame,
     Pause,
     Setting,
-    SelectLevel
+    SelectLevel,
+    SelectModel
 }
 public class GameController : Singleton<GameController>
 {
@@ -22,6 +23,7 @@ public class GameController : Singleton<GameController>
     [SerializeField] private PlayingUI playingUI;
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private SelectLevelUI selectLevelUI;
+    [SerializeField] private SelectModelUI selectModelUI;
 
 
     private GameState gameState;
@@ -30,10 +32,6 @@ public class GameController : Singleton<GameController>
     {
         UIController.Instance.ClearStackAndSetInitialPage(mainMenuUI);
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
-    }
-
-    private void Start()
-    {
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
@@ -71,6 +69,8 @@ public class GameController : Singleton<GameController>
             case GameState.Setting:
                 break;
             case GameState.SelectLevel:
+                break;
+            case GameState.SelectModel:
                 break;
         }
 

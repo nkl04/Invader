@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -14,6 +15,13 @@ public class PlayerShooter : MonoBehaviour, IShooter
 
     private void Start()
     {
+        StartCoroutine(AutoShoot());
+        PlayerManager.Instance.OnPlayerModelStatusChanged += PlayerManager_OnPlayerModelChanged;
+    }
+
+    private void PlayerManager_OnPlayerModelChanged(object sender, EventArgs e)
+    {
+        StopAllCoroutines();
         StartCoroutine(AutoShoot());
     }
 
@@ -43,5 +51,10 @@ public class PlayerShooter : MonoBehaviour, IShooter
     public void SetShootingPointList(List<Transform> shootingPointList)
     {
         this.shootingPointList = shootingPointList;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }

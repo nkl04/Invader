@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
+    private const string ENEMY_TAG = "enemy";
 
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private LevelSO levelSO;
@@ -27,6 +28,7 @@ public class EnemyManager : Singleton<EnemyManager>
     private new void Awake()
     {
         selectLevelUI.OnLevelSelected += SelectLevelUI_OnLevelSelected;
+
     }
 
     private void SelectLevelUI_OnLevelSelected(object sender, SelectLevelUI.OnSelectLevelEventArgs e)
@@ -40,14 +42,7 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     private void GameController_OnGameStateUpdated(object sender, System.EventArgs e)
     {
-        if (GameController.Instance.GameState == GameState.InGame)
-        {
-            allowSpawn = true;
-        }
-        else
-        {
-            allowSpawn = false;
-        }
+        allowSpawn = GameController.Instance.GameState == GameState.InGame;
     }
 
     private void Update()
@@ -117,6 +112,7 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
 
+    #region StageType
     private void OnFollowPathStage()
     {
 
@@ -178,6 +174,8 @@ public class EnemyManager : Singleton<EnemyManager>
             isEndOfStage = true;
         }
     }
+
+    #endregion
 
     //check the enemy list and remove the dead enemies
     public bool IsClearEnemyList()
