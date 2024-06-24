@@ -22,23 +22,16 @@ public class PlayerHealth : MonoBehaviour, IHealth
         cam = Camera.main;
         isDead = false;
         cameraShake = cam.GetComponent<CameraShake>();
-        currentHeath = maxHeath;
 
-        GameController.Instance.OnGameStateUpdated += GameController_OnGameStateUpdated;
     }
 
     private void Start()
     {
+        currentHeath = maxHeath;
         healthBar.SetMaxHeath(maxHeath);
     }
 
-    private void GameController_OnGameStateUpdated(object sender, System.EventArgs e)
-    {
-        if (GameController.Instance.GameState == GameState.InGame)
-        {
 
-        }
-    }
 
     public void TakeDamage(float damage)
     {
@@ -53,7 +46,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         if (cameraShake != null)
         {
             cameraShake.Play(); // shake the camera
-            //AudioManager.Instance.PlayShakeClip(); // play shake camera clip
         }
         if (currentHeath <= 0)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,18 @@ public enum FlyMode
 
 public class Enemy : MonoBehaviour
 {
+    [Serializable]
+    public class DropRate
+    {
+        public IItem item;
+        public int rate;
+        public int minDrop;
+        public int maxDrop;
+    }
     public FlyMode FlyMode { get => flyMode; set => flyMode = value; }
+    public List<DropRate> DropRateList { get => dropRateList; set => dropRateList = value; }
     [SerializeField] private FlyMode flyMode;
+    [SerializeField] private List<DropRate> dropRateList;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -54,4 +65,5 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
 }

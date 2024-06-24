@@ -10,7 +10,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private PlayerShooter playerShooter;
     private List<Transform> shootingPointList;
 
-    private void Awake()
+    private new void Awake()
     {
         playerHealth = GetComponent<PlayerHealth>();
         playerMovement = GetComponent<PlayerMovement>();

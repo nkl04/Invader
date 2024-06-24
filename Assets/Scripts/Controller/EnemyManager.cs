@@ -24,7 +24,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private bool allowSpawn;
 
-    private void Awake()
+    private new void Awake()
     {
         selectLevelUI.OnLevelSelected += SelectLevelUI_OnLevelSelected;
     }

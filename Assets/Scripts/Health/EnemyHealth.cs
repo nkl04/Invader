@@ -5,15 +5,21 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private float maxHeath;
+    private Enemy enemy;
     // [SerializeField] private ParticleSystem deathEffect;
     private float currentHeath;
     private bool isDead;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         isDead = false;
         currentHeath = maxHeath;
     }
 
+    private void Start()
+    {
+        enemy = GetComponent<Enemy>();
+    }
     public void TakeDamage(float damage)
     {
         currentHeath -= damage;
@@ -33,6 +39,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     public void Die()
     {
+        DropItemSpawner.Instance.Drop(enemy.DropRateList, transform.position);
         gameObject.SetActive(false);
     }
 

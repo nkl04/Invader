@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private const string PLAYER_TAG = "Player";
+    private const string ENEMY_TAG = "Enemy";
     [SerializeField] private BulletSO bulletSO;
 
     //set active true all children if have
@@ -13,12 +15,13 @@ public class Bullet : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
-    }
-
-    private void Update()
-    {
         StartCoroutine(ToggleObject());
     }
+
+    //private void Update()
+    //{
+    //    StartCoroutine(ToggleObject());
+    //}
 
     IEnumerator ToggleObject()
     {
@@ -30,15 +33,20 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Bullet>() && bulletSO.Tag.ToString().CompareTo(other.gameObject.tag) != 0)
+        if (!other.GetComponent<Bullet>() && bulletSO.Tag.ToString().CompareTo(other.gameObject.tag) != 0 && !other.CompareTag("Item"))
         {
-            if (other.tag == "Player")
+
+            if (other.gameObject.CompareTag(PLAYER_TAG))
             {
-                Debug.Log("hit");
+                IHealth otherHealth = other.GetComponentInParent<IHealth>();
+
+                otherHealth?.TakeDamage(bulletSO.Damage);
             }
-            if (other.gameObject.TryGetComponent<IHealth>(out var otherHeath))
+            if (other.gameObject.CompareTag(ENEMY_TAG))
             {
-                otherHeath.TakeDamage(bulletSO.Damage);
+                IHealth otherHealth = other.GetComponent<IHealth>();
+
+                otherHealth?.TakeDamage(bulletSO.Damage);
             }
             Hide();
         }

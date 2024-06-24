@@ -33,7 +33,6 @@ public class SelectLevelUI : UIPage
                     levelSO = levelSO
                 });
                 UIController.Instance.PushAndShow(playingUI);
-                Debug.Log("level" + (i + 1));
             });
         }
     }
