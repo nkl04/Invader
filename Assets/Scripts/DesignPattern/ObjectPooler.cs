@@ -16,10 +16,11 @@ public class ObjectPooler : Singleton<ObjectPooler>
         public bool expandable;
     }
     [SerializeField] private List<Pool> poolList;
-    [SerializeField] private Dictionary<string,List<GameObject>> poolDictionary;
-    
+    [SerializeField] private Dictionary<string, List<GameObject>> poolDictionary;
 
-    private new void Awake() {
+
+    private new void Awake()
+    {
         poolDictionary = new Dictionary<string, List<GameObject>>();
 
         foreach (Pool pool in poolList)
@@ -27,11 +28,20 @@ public class ObjectPooler : Singleton<ObjectPooler>
             List<GameObject> objectPoolQueue = new List<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab,this.transform);
+                GameObject obj = Instantiate(pool.prefab, this.transform);
                 obj.SetActive(false);
                 objectPoolQueue.Add(obj);
             }
-            poolDictionary.Add(pool.tag,objectPoolQueue);
+            poolDictionary.Add(pool.tag, objectPoolQueue);
+        }
+        GameController.Instance.OnGameStateUpdated += GameController_OnGameStateUpdated;
+    }
+
+    private void GameController_OnGameStateUpdated(object sender, EventArgs e)
+    {
+        if (GameController.Instance.GameState == GameState.MainMenu || GameController.Instance.GameState == GameState.SelectModel)
+        {
+            DisableAllPooledObject();
         }
     }
 
@@ -44,19 +54,37 @@ public class ObjectPooler : Singleton<ObjectPooler>
                 return poolDictionary[tag][i];
             }
         }
-        
+
         foreach (Pool item in poolList)
         {
             if (item.tag == tag && item.expandable)
             {
-                GameObject obj = Instantiate(item.prefab,this.transform);
+                GameObject obj = Instantiate(item.prefab, this.transform);
                 obj.SetActive(false);
-                item.size ++;
+                item.size++;
                 poolDictionary[tag].Add(obj);
                 return obj;
             }
         }
         return null;
+    }
 
+    public void DisableAllPooledObject(string tag)
+    {
+        foreach (GameObject obj in poolDictionary[tag])
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    public void DisableAllPooledObject()
+    {
+        foreach (KeyValuePair<string, List<GameObject>> item in poolDictionary)
+        {
+            foreach (GameObject obj in item.Value)
+            {
+                obj.SetActive(false);
+            }
+        }
     }
 }

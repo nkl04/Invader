@@ -156,6 +156,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flyMode: 0
+  dropRateList:
+  - item: {fileID: 11400000, guid: 35a8b65b66a1abc45990cacfaa7e25b4, type: 2}
+    rate: 0
+    minDrop: 0
+    maxDrop: 0
 --- !u!114 &-2706712982441021172
 MonoBehaviour:
   m_ObjectHideFlags: 0

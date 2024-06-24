@@ -12,11 +12,11 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private Transform spawner1;
     [SerializeField] private Transform spawner2;
-    [SerializeField] private bool canSpawn;
 
     private Transform currentSpawner;
     private float timeBetweenSpawns;
     private int spawnAmount = 0;
+    private bool canSpawn;
 
     #region Spawn Enemy
     public Enemy SpawnEnemyFromSpawnerSequential()
@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
             return null;
         }
 
-        if(currentSpawner == null)
+        if (currentSpawner == null)
         {
             currentSpawner = Random.Range(0, 2) == 0 ? spawner1 : spawner2;
         }
@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
     #endregion
-    
+
     public void ResetSpawnAmount()
     {
         spawnAmount = 0;
