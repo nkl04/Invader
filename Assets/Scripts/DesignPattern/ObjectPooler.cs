@@ -87,4 +87,12 @@ public class ObjectPooler : Singleton<ObjectPooler>
             }
         }
     }
+
+    public void ClearChildObjectIn(Transform transform)
+    {
+        foreach (Transform obj in transform)
+        {
+            Destroy(obj.gameObject);
+        }
+    }
 }
